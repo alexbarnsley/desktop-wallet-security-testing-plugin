@@ -9,7 +9,7 @@ module.exports = {
   data (vm) {
     console.log('data vm', vm)
     return {
-      vm: vm
+      vm
     }
   }
 }

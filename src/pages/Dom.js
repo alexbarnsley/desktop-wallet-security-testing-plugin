@@ -44,9 +44,9 @@ module.exports = {
     /* These computed properties produce side effects that are not detected by Vue */
 
     appendToBottom () {
-      const p = document.createElement('p')
-      p.innerHTML = '&nbsp;Ecosystem amazing team'
-      document.body.querySelector('footer').appendChild(p)
+      const $p = document.createElement('p')
+      $p.innerHTML = '&nbsp;Ecosystem amazing team'
+      document.body.querySelector('footer').appendChild($p)
 
       return 'Yes, check the bottom'
     },
@@ -66,7 +66,17 @@ module.exports = {
     },
 
     removeSidebarItem () {
-      return 'Yes, the announcements button on the sidebar is gone'
+      this.$nextTick(() => {
+        const $container = document.querySelector('.AppSidemenu__container')
+        $container.innerHTML = ''
+
+        const $item = document.querySelector('.MenuNavigationItem[title=Announcements]')
+        const $parent = $item.parentElement
+        $item.innerHTML = ''
+        $parent.removeChild($item)
+      })
+
+      return 'Yes, the announcements button on the sidebar is gone forever'
     },
 
     spyClicks () {

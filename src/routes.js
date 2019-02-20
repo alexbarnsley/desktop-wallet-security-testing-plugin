@@ -33,5 +33,20 @@ module.exports = [
     path: '/require',
     name: 'require',
     component: 'require'
+  },
+  {
+    path: '/db',
+    name: 'db',
+    component: 'db'
+  },
+  {
+    path: '/dom',
+    name: 'dom',
+    component: 'dom'
+  },
+  {
+    path: '/css',
+    name: 'css',
+    component: 'css'
   }
 ]

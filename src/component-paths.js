@@ -6,4 +6,7 @@ module.exports = {
   'store-parent': 'pages/StoreParent.js',
   'data-vm': 'pages/DataVM.js',
   'require': 'pages/Require.js',
+  'dom': 'pages/Dom.js',
+  'db': 'pages/Db.js',
+  'css': 'pages/Css.js'
 }

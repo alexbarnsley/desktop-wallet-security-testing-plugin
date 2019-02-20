@@ -26,5 +26,17 @@ module.exports = [
   {
     routeName: 'require',
     title: 'Require'
+  },
+  {
+    routeName: 'dom',
+    title: 'External DOM access'
+  },
+  {
+    routeName: 'db',
+    title: 'DB Direct access'
+  },
+  {
+    routeName: 'css',
+    title: 'CSS access'
   }
 ]

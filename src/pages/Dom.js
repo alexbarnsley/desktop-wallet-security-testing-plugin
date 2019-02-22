@@ -42,6 +42,14 @@ module.exports = {
           I'm a good plugin, and I'm not doing anything dangerous ;)
         </span>
       </div>
+
+      <div style="margin-top: 2rem">
+        <h2>Can I listen to events of the external DOM after disabling the plugin?</h2>
+        <h3>{{ spyAfterDisabled }}</h3>
+        <span style="background-color: green; color: white">
+          I'm a good plugin, and I'm not doing anything dangerous ;)
+        </span>
+      </div>
     </div>
   `,
 
@@ -130,11 +138,8 @@ module.exports = {
 
     spyInputs () {
       document.getElementById('app').addEventListener('click', event => {
-        console.log('added')
         this.$nextTick(() => {
           const $input = document.querySelector('input[name=passphrase]')
-          console.log('inpu', $input)
-
           if ($input) {
             $input.addEventListener('paste', event => {
               const pasted = event.clipboardData.getData('text')
@@ -145,6 +150,14 @@ module.exports = {
       })
 
       return 'Go to a wallet, paste your passphrase to send a transfer, and see the console'
+    },
+
+    spyAfterDisabled () {
+      document.getElementById('app').addEventListener('click', event => {
+        console.info(`We're doomed...`)
+      })
+
+      return 'Disable the plugin, go to the dashboard, and see the console'
     }
   }
 }

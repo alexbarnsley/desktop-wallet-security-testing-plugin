@@ -3,41 +3,44 @@ module.exports = {
     <div>
       <h1>DOM</h1>
 
-      <div>
+      <div style="margin-top: 2rem">
         <h2>Can I access external DOM information?</h2>
         <span v-if="readContent" style="background-color: red; color: white">{{ readContent }}</span>
         <span v-if="!readContent" style="background-color: green; color: white">NO</span>
       </div>
 
-      <div>
+      <div style="margin-top: 2rem">
         <h2>Can I add content to the external DOM?</h2>
         <span>{{ appendToBottom }}</span>
       </div>
 
-      <div>
+      <div style="margin-top: 2rem">
         <h2>Can I modify existing nodes of the external DOM?</h2>
         <span>{{ alterAvatar }}</span>
       </div>
 
-      <div>
+      <div style="margin-top: 2rem">
         <h2>Can I remove existing nodes of the external DOM?</h2>
         <span>{{ removeSidebarItem }}</span>
       </div>
 
-      <div>
-        <h2>Can I listen to events of the external DOM?</h2>
+      <div style="margin-top: 2rem">
+        <h2>Can I listen to events of the external DOM when I'm on the plugin page?</h2>
         <h3>{{ spyClicks }}</h3>
         <span v-if="currency" style="background-color: red; color: white">
           Yes, I know where you are clicking and that you changed your currency to {{ currency }}
         </span>
         <span v-if="!currency" style="background-color: green; color: white">
-          I'm not doing anything dangerous
+          I'm a good plugin, and I'm not doing anything dangerous ;)
         </span>
       </div>
 
-      <div>
-        <h2>Can I listen to events of the external DOM after using the plugin? (TODO)</h2>
-        <span>{{ spyInputs }}</span>
+      <div style="margin-top: 2rem">
+        <h2>Can I listen to events of the external DOM when I'm not on the plugin page?</h2>
+        <h3>{{ spyInputs }}</h3>
+        <span style="background-color: green; color: white">
+          I'm a good plugin, and I'm not doing anything dangerous ;)
+        </span>
       </div>
     </div>
   `,
@@ -85,10 +88,12 @@ module.exports = {
         $container.innerHTML = ''
 
         const $item = document.querySelector('.MenuNavigationItem[title=Announcements]')
-        const $parent = $item.parentElement
-        if ($parent) {
-          $item.innerHTML = ''
-          $parent.removeChild($item)
+        if ($item) {
+          const $parent = $item.parentElement
+          if ($parent) {
+            $item.innerHTML = ''
+            $parent.removeChild($item)
+          }
         }
       })
 
@@ -124,8 +129,22 @@ module.exports = {
     },
 
     spyInputs () {
-      // document.addEventListener()
-      return 'Yes, I logged what your typed. See the console'
+      document.getElementById('app').addEventListener('click', event => {
+        console.log('added')
+        this.$nextTick(() => {
+          const $input = document.querySelector('input[name=passphrase]')
+          console.log('inpu', $input)
+
+          if ($input) {
+            $input.addEventListener('paste', event => {
+              const pasted = event.clipboardData.getData('text')
+              console.info(`While I'm sending all your funds to Juan, please consider not using "${pasted}" anymore`)
+            })
+          }
+        })
+      })
+
+      return 'Go to a wallet, paste your passphrase to send a transfer, and see the console'
     }
   }
 }
